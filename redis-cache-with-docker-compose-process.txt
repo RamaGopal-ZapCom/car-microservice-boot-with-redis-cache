@@ -1,0 +1,671 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS D:\Air-Asia-POC-7-11-2025\POC\cart-microservice> docker-compose up
+time="2025-11-10T16:30:07+05:30" level=warning msg="D:\\Air-Asia-POC-7-11-2025\\POC\\cart-microservice\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 3/3
+ ✔ Container mongodb                Running                                                                                       0.0s
+ ✔ Container redis                  Recreated                                                                                     0.5s
+ ✔ Container combined-cart-service  Running                                                                                       0.0s
+Attaching to redis-1, combined-cart-service, mongodb
+redis-1  | 1:C 10 Nov 2025 11:00:07.835 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis-1  | 1:C 10 Nov 2025 11:00:07.835 * Redis version=7.4.7, bits=64, commit=00000000, modified=0, pid=1, just started
+redis-1  | 1:C 10 Nov 2025 11:00:07.835 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis-1  | 1:M 10 Nov 2025 11:00:07.835 * monotonic clock: POSIX clock_gettime
+redis-1  | 1:M 10 Nov 2025 11:00:07.837 * Running mode=standalone, port=6379.
+redis-1  | 1:M 10 Nov 2025 11:00:07.837 * Server initialized
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * Loading RDB produced by version 7.4.7
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * RDB age 0 seconds
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * RDB memory usage when created 0.90 Mb
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * Done loading RDB, keys loaded: 0, keys expired: 0.
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * DB loaded from disk: 0.000 seconds
+redis-1  | 1:M 10 Nov 2025 11:00:07.838 * Ready to accept connections tcp
+mongodb  | {"t":{"$date":"2025-11-10T11:00:35.196+00:00"},"s":"I",  "c":"WTCHKPT",  "id":22430,   "ctx":"Checkpointer","msg":"WiredTiger message","attr":{"message":{"ts_sec":1762772435,"ts_usec":196843,"thread":"1:0x797bf4cb8640","session_name":"WT_SESSION.checkpoint","
+category":"WT_VERB_CHECKPOINT_PROGRESS","category_id":6,"verbose_level":"DEBUG_1","verbose_level_id":1,"msg":"saving checkpoint snapshot min: 13, snapshot max: 13 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 82"}}}
+Gracefully Stopping... press Ctrl+C again to force
+ Container combined-cart-service  Stopping
+redis-1 exited with code 137
+mongodb exited with code 137
+ Container combined-cart-service  Stopped
+ Container cart-microservice-redis-1  Stopping
+ Container mongodb  Stopping
+
+
+
+
+ Container cart-microservice-redis-1  Stopped
+ Container mongodb  Stopped
+#============================================================================
+This is the correct process for run the using docker-compose with redis cache
+=============================================================================
+PS D:\Air-Asia-POC-7-11-2025\POC\cart-microservice> docker-compose down
+time="2025-11-10T16:31:10+05:30" level=warning msg="D:\\Air-Asia-POC-7-11-2025\\POC\\cart-microservice\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Running 4/4
+ ✔ Container combined-cart-service      Removed                                                                                   0.0s
+ ✔ Container mongodb                    Removed                                                                                   0.0s
+ ✔ Container cart-microservice-redis-1  Removed                                                                                   0.0s
+ ✔ Network cart-microservice_default    Removed                                                                                   0.3s
+PS D:\Air-Asia-POC-7-11-2025\POC\cart-microservice> docker-compose up -d --build
+time="2025-11-10T16:31:22+05:30" level=warning msg="D:\\Air-Asia-POC-7-11-2025\\POC\\cart-microservice\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+[+] Building 3.8s (11/11) FINISHED
+ => [internal] load local bake definitions                                                                                        0.0s
+ => => reading from stdin 634B                                                                                                    0.0s
+ => [internal] load build definition from Dockerfile                                                                              0.0s
+ => => transferring dockerfile: 576B                                                                                              0.0s
+ => [internal] load metadata for docker.io/library/eclipse-temurin:17-jdk-alpine                                                  2.0s
+ => [auth] library/eclipse-temurin:pull token for registry-1.docker.io                                                            0.0s
+ => [internal] load .dockerignore                                                                                                 0.0s
+ => => transferring context: 2B                                                                                                   0.0s
+ => [1/3] FROM docker.io/library/eclipse-temurin:17-jdk-alpine@sha256:eaf56b7430cee6c93871106367715e2675192093d8f67dbbdbe07136f7  0.0s
+ => [internal] load build context                                                                                                 1.2s
+ => => transferring context: 46.47MB                                                                                              1.2s
+ => CACHED [2/3] WORKDIR /app                                                                                                     0.0s
+ => [3/3] COPY target/cart-microservice.jar /app/cart-microservice.jar                                                            0.2s
+ => exporting to image                                                                                                            0.1s
+ => => exporting layers                                                                                                           0.1s
+ => => writing image sha256:8e1d4384c6ee01df6e0a87686427049e9e4201a5406767d124f8f6e72b1b10c1                                      0.0s
+ => => naming to docker.io/library/cart-microservice-combined-cart-service                                                        0.0s
+ => resolving provenance for metadata file                                                                                        0.0s
+[+] Running 5/5
+ ✔ cart-microservice-combined-cart-service  Built                                                                                 0.0s
+ ✔ Network cart-microservice_default        Created                                                                               0.1s
+ ✔ Container mongodb                        Started                                                                               0.5s
+ ✔ Container cart-microservice-redis-1      Started                                                                               0.5s
+ ✔ Container combined-cart-service          Started                                                                               0.6s
+PS D:\Air-Asia-POC-7-11-2025\POC\cart-microservice> docker-compose logs -f combined-cart-service
+time="2025-11-10T16:31:38+05:30" level=warning msg="D:\\Air-Asia-POC-7-11-2025\\POC\\cart-microservice\\docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion"
+combined-cart-service  |
+combined-cart-service  |   .   ____          _            __ _ _
+combined-cart-service  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+combined-cart-service  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+combined-cart-service  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+combined-cart-service  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+combined-cart-service  |  =========|_|==============|___/=/_/_/_/
+combined-cart-service  |
+combined-cart-service  |  :: Spring Boot ::                (v3.5.7)
+combined-cart-service  |
+combined-cart-service  | 2025-11-10T11:01:28.792Z  INFO 1 --- [combined-cart-service] [           main] c.air_asia.CartMicroserviceAppl
+ication   : Starting CartMicroserviceApplication v0.0.1-SNAPSHOT using Java 17.0.17 with PID 1 (/app/cart-microservice.jar started by root in /app)
+combined-cart-service  | 2025-11-10T11:01:28.796Z  INFO 1 --- [combined-cart-service] [           main] c.air_asia.CartMicroserviceApplication   : No active profile set, falling back to 1 default profile: "default"
+combined-cart-service  | 2025-11-10T11:01:30.628Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+combined-cart-service  | 2025-11-10T11:01:30.633Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+combined-cart-service  | 2025-11-10T11:01:30.836Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 188 ms. Found 1 MongoDB repository interface.
+combined-cart-service  | 2025-11-10T11:01:30.857Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+combined-cart-service  | 2025-11-10T11:01:30.859Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+combined-cart-service  | 2025-11-10T11:01:30.876Z  INFO 1 --- [combined-cart-service] [           main] .RepositoryConfigurationExtensi
+onSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.air_asia.repository.C
+artRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: o
+rg.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+combined-cart-service  | 2025-11-10T11:01:30.876Z  INFO 1 --- [combined-cart-service] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+combined-cart-service  | 2025-11-10T11:01:31.620Z  INFO 1 --- [combined-cart-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+combined-cart-service  | 2025-11-10T11:01:31.642Z  INFO 1 --- [combined-cart-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+combined-cart-service  | 2025-11-10T11:01:31.643Z  INFO 1 --- [combined-cart-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+combined-cart-service  | 2025-11-10T11:01:31.693Z  INFO 1 --- [combined-cart-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+combined-cart-service  | 2025-11-10T11:01:31.695Z  INFO 1 --- [combined-cart-service] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2825 ms
+combined-cart-service  | 2025-11-10T11:01:32.394Z  INFO 1 --- [combined-cart-service] [           main] org.mongodb.driver.client
+          : MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "5.5.2"}, "os": {"type": "Li
+nux", "name": "Linux", "architecture": "amd64", "version": "6.6.87.2-microsoft-standard-WSL2"}, "platform": "Java/Eclipse Adoptium/17.0
+.17+10", "env": {"container": {"runtime": "docker"}}} created with settings MongoClientSettings{readPreference=primary, writeConcern=Wr
+iteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=
+null, transportSettings=null, commandListeners=[io.micrometer.core.instrument.binder.mongodb.MongoMetricsCommandListener@f59da34], code
+cRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecPro
+vider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridF
+SFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.mo
+del.mql.ExpressionCodecProvider@752973de, com.mongodb.Jep395RecordCodecProvider@52a67293, com.mongodb.KotlinCodecProvider@793cef95]}, l
+oggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[mongodb:27017], srvServiceName=mongodb, mode=SINGLE, requ
+iredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms'
+, localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=Pr
+oxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTi
+meoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSet
+tings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, mainte
+nanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[io.micrometer.core.instrument.binder.mongodb.MongoMetrics
+ConnectionPoolListener@38f502fc], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=5
+00, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNa
+meAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+combined-cart-service  | 2025-11-10T11:01:32.437Z  INFO 1 --- [combined-cart-service] [}-mongodb:27017] org.mongodb.driver.cluster
+          : Monitor thread successfully connected to server with description ServerDescription{address=mongodb:27017, type=STANDALONE,
+cryptd=false, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=36886191, minRoundTripTimeNanos=0}
+combined-cart-service  | 2025-11-10T11:01:34.868Z  INFO 1 --- [combined-cart-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+combined-cart-service  | 2025-11-10T11:01:34.951Z  INFO 1 --- [combined-cart-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+combined-cart-service  | 2025-11-10T11:01:34.972Z  INFO 1 --- [combined-cart-service] [           main] c.air_asia.CartMicroserviceApplication   : Started CartMicroserviceApplication in 6.814 seconds (process running for 7.409)
+combined-cart-service  | 2025-11-10T11:03:33.782Z  INFO 1 --- [combined-cart-service] [nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+combined-cart-service  | 2025-11-10T11:03:33.783Z  INFO 1 --- [combined-cart-service] [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+combined-cart-service  | 2025-11-10T11:03:33.786Z  INFO 1 --- [combined-cart-service] [nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+combined-cart-service  | 2025-11-10T11:03:34.553Z  INFO 1 --- [combined-cart-service] [nio-8081-exec-2] c.air_asia.service.impl.CartServiceImpl  : ✅ Saved cart to Redis for user: U1003
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++===========
+Open new Power-sell cmd and then verifying the data on redis-cache using below command
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+PS C:\Users\RamaGopal> docker exec -it cart-microservice-redis-1 redis-cli
+127.0.0.1:6379> KEYS *
+1) "CART_U1003"
+2) "cartCache::U1003"
+127.0.0.1:6379> GET cartCache
+(nil)
+127.0.0.1:6379> GET cartCache::U1003
+"\xac\xed\x00\x05sr\x00\x18com.air_asia.schema.Cart\xbd\x01?\xdb\x91\xa88D\x02\x00\x04D\x00\x0btotalAmountL\x00\x02idt\x00\x12Ljava/lang/String;L\x00\x05itemst\x00\x10Ljava/util/List;L\x00\x06userIdq\x00~\x00\x01xp@\xe5|\x00\x00\x00\x00\x00t\x00\x186911c686fecd86209cc9d6b1sr\x00\x13java.util.ArrayListx\x81\xd2\x1d\x99\xc7a\x9d\x03\x00\x01I\x00\x04sizexp\x00\x00\x00\x03w\x04\x00\x00\x00\x03sr\x00\x1ccom.air_asia.schema.CartItem\x9de\xd1\x96\x1a\x84i\xa5\x02\x00\x04D\x00\x05priceL\x00\x0bdescriptionq\x00~\x00\x01L\x00\x06itemIdq\x00~\x00\x01L\x00\x04typeq\x00~\x00\x01xp@\xde\xc3\x00\x00\x00\x00\x00t\x00'Bangalore to Kuala Lumpur flight tickett\x00\x06FL1234t\x00\bflight-1sq\x00~\x00\a@\xc5\xe0\x00\x00\x00\x00\x00t\x00%3-night stay at AirAsia partner hotelt\x00\x06HT4567t\x00\ahotel-1sq\x00~\x00\a@\x94P\x00\x00\x00\x00\x00t\x00\x12Extra baggage 15kgt\x00\x06AD7891t\x00\aaddon-1xt\x00\x05U1003"
+127.0.0.1:6379>
+
+
+======================================-=====================================================================
+Database-data cross-checked with terminal why because compose not showing data it is connecting localhost
+==========================================================================================================
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\RamaGopal> docker-compose up -d
+no configuration file provided: not found
+PS C:\Users\RamaGopal> docker ps
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED          STATUS          PORTS                                             NAMES
+879a4af724d4   redis:7                                   "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   6379/tcp                                          naughty_pare
+6596ddae23a1   redis:7                                   "docker-entrypoint.s…"   15 minutes ago   Up 14 minutes   6379/tcp                                          serene_bouman
+c66bcb35c887   cart-microservice-combined-cart-service   "java -jar cart-micr…"   21 minutes ago   Up 3 minutes    0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp       combined-cart-service
+5a5984528d38   mongo:7                                   "docker-entrypoint.s…"   21 minutes ago   Up 3 minutes    0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   mongodb
+a37debe6882b   redis:7                                   "docker-entrypoint.s…"   21 minutes ago   Up 8 minutes    0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       redis
+PS C:\Users\RamaGopal> docker exec -it redis redis-cli
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379>
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug redis
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\RamaGopal> docker exec -it redis redis-cli
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug redis
+    Learn more at https://docs.docker.com/go/debug-cli/
+Error response from daemon: No such container: redis
+PS C:\Users\RamaGopal> docker exec -it redis redis-cli
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug redis
+    Learn more at https://docs.docker.com/go/debug-cli/
+Error response from daemon: No such container: redis
+PS C:\Users\RamaGopal> KEYS *
+KEYS : The term 'KEYS' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of
+the name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ KEYS *
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (KEYS:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\RamaGopal> docker exec -it redis redis-cli
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug redis
+    Learn more at https://docs.docker.com/go/debug-cli/
+Error response from daemon: No such container: redis
+PS C:\Users\RamaGopal> ^C
+PS C:\Users\RamaGopal> docker exec -it cart-microservice-redis-1 redis-cli
+127.0.0.1:6379> KEYS *
+1) "CART_U1003"
+2) "cartCache::U1003"
+127.0.0.1:6379> GET cartCache
+(nil)
+127.0.0.1:6379> GET cartCache::U1003
+"\xac\xed\x00\x05sr\x00\x18com.air_asia.schema.Cart\xbd\x01?\xdb\x91\xa88D\x02\x00\x04D\x00\x0btotalAmountL\x00\x02idt\x00\x12Ljava/lang/String;L\x00\x05itemst\x00\x10Ljava/util/List;L\x00\x06userIdq\x00~\x00\x01xp@\xe5|\x00\x00\x00\x00\x00t\x00\x186911c686fecd86209cc9d6b1sr\x00\x13java.util.ArrayListx\x81\xd2\x1d\x99\xc7a\x9d\x03\x00\x01I\x00\x04sizexp\x00\x00\x00\x03w\x04\x00\x00\x00\x03sr\x00\x1ccom.air_asia.schema.CartItem\x9de\xd1\x96\x1a\x84i\xa5\x02\x00\x04D\x00\x05priceL\x00\x0bdescriptionq\x00~\x00\x01L\x00\x06itemIdq\x00~\x00\x01L\x00\x04typeq\x00~\x00\x01xp@\xde\xc3\x00\x00\x00\x00\x00t\x00'Bangalore to Kuala Lumpur flight tickett\x00\x06FL1234t\x00\bflight-1sq\x00~\x00\a@\xc5\xe0\x00\x00\x00\x00\x00t\x00%3-night stay at AirAsia partner hotelt\x00\x06HT4567t\x00\ahotel-1sq\x00~\x00\a@\x94P\x00\x00\x00\x00\x00t\x00\x12Extra baggage 15kgt\x00\x06AD7891t\x00\aaddon-1xt\x00\x05U1003"
+127.0.0.1:6379>
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug cart-microservice-redis-1
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\RamaGopal> docker exec -it cart-microservice-redis-1 redis-cli
+127.0.0.1:6379> keys *
+1) "cartCache::U1003"
+2) "CART_U1003"
+127.0.0.1:6379> GET CART_U1003
+"{\"@class\":\"com.air_asia.schema.Cart\",\"id\":null,\"userId\":\"U1003\",\"items\":[\"java.util.ArrayList\",[{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"FL1234\",\"type\":\"flight-1\",\"description\":\"Bangalore to Kuala Lumpur flight ticket\",\"price\":31500.0},{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"HT4567\",\"type\":\"hotel-1\",\"description\":\"3-night stay at AirAsia partner hotel\",\"price\":11200.0},{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"AD7891\",\"type\":\"addon-1\",\"description\":\"Extra baggage 15kg\",\"price\":1300.0}]],\"totalAmount\":44000.0}"
+127.0.0.1:6379> get cartCache::U1003"
+Invalid argument(s)
+127.0.0.1:6379> get cartCache::U1003
+"\xac\xed\x00\x05sr\x00\x18com.air_asia.schema.Cart\xbd\x01?\xdb\x91\xa88D\x02\x00\x04D\x00\x0btotalAmountL\x00\x02idt\x00\x12Ljava/lang/String;L\x00\x05itemst\x00\x10Ljava/util/List;L\x00\x06userIdq\x00~\x00\x01xp@\xe5|\x00\x00\x00\x00\x00t\x00\x186911caec3363974d05df38a3sr\x00\x13java.util.ArrayListx\x81\xd2\x1d\x99\xc7a\x9d\x03\x00\x01I\x00\x04sizexp\x00\x00\x00\x03w\x04\x00\x00\x00\x03sr\x00\x1ccom.air_asia.schema.CartItem\x9de\xd1\x96\x1a\x84i\xa5\x02\x00\x04D\x00\x05priceL\x00\x0bdescriptionq\x00~\x00\x01L\x00\x06itemIdq\x00~\x00\x01L\x00\x04typeq\x00~\x00\x01xp@\xde\xc3\x00\x00\x00\x00\x00t\x00'Bangalore to Kuala Lumpur flight tickett\x00\x06FL1234t\x00\bflight-1sq\x00~\x00\a@\xc5\xe0\x00\x00\x00\x00\x00t\x00%3-night stay at AirAsia partner hotelt\x00\x06HT4567t\x00\ahotel-1sq\x00~\x00\a@\x94P\x00\x00\x00\x00\x00t\x00\x12Extra baggage 15kgt\x00\x06AD7891t\x00\aaddon-1xt\x00\x05U1003"
+127.0.0.1:6379>
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug cart-microservice-redis-1
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\RamaGopal> docker exec -it cart-microservice-redis-1 redis-cli
+127.0.0.1:6379> keys *
+1) "cartCache::U1003"
+2) "CART_U1003"
+127.0.0.1:6379> get CART_U1003
+"{\"@class\":\"com.air_asia.schema.Cart\",\"id\":null,\"userId\":\"U1003\",\"items\":[\"java.util.ArrayList\",[{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"FL1234\",\"type\":\"flight-1\",\"description\":\"Bangalore to Kuala Lumpur flight ticket\",\"price\":31500.0},{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"HT4567\",\"type\":\"hotel-1\",\"description\":\"3-night stay at AirAsia partner hotel\",\"price\":11200.0},{\"@class\":\"com.air_asia.schema.CartItem\",\"itemId\":\"AD7891\",\"type\":\"addon-1\",\"description\":\"Extra baggage 15kg\",\"price\":1300.0}]],\"totalAmount\":44000.0}"
+127.0.0.1:6379>
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug cart-microservice-redis-1
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\RamaGopal> docker ps
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED              STATUS                        PORTS                                             NAMES
+43eadbe7b296   cart-microservice-combined-cart-service   "java -jar cart-micr…"   About a minute ago   Up About a minute             0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp       combined-cart-service
+967d62922cc1   redis:7                                   "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       cart-microservice-redis-1
+11b21bc6b42b   mongo:7                                   "docker-entrypoint.s…"   About a minute ago   Up About a minute             0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   mongodb
+PS C:\Users\RamaGopal> docker exec -it mongodb mongo
+OCI runtime exec failed: exec failed: unable to start container process: exec: "mongo": executable file not found in $PATH: unknown
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug mongodb
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\RamaGopal> docker run -it --rm --network cart-microservice_default mongo:7 mongosh mongodb://mongodb:27017/combined_cart_db
+Current Mongosh Log ID: 6911ce1549f2e5b7ecce5f46
+Connecting to:          mongodb://mongodb:27017/combined_cart_db?directConnection=true&appName=mongosh+2.5.8
+Using MongoDB:          7.0.25
+Using Mongosh:          2.5.8
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+
+To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+You can opt-out by running the disableTelemetry() command.
+
+------
+   The server generated these startup warnings when booting
+   2025-11-10T11:33:25.376+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+   2025-11-10T11:33:26.151+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2025-11-10T11:33:26.152+00:00: vm.max_map_count is too low
+------
+
+combined_cart_db> show collections
+carts
+combined_cart_db> db.carts.find().pretty()
+[
+  {
+    _id: ObjectId('6911be8d90d6fbe14ba9db7f'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911beb390d6fbe14ba9db80'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911bec090d6fbe14ba9db81'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911befe90d6fbe14ba9db82'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c1a0a15c5a04fe5b8a6a'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c2c4cc43173ee7f206af'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c2f0cc43173ee7f206b0'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c30fcc43173ee7f206b1'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c3b7db207f56dd55e3a8'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c45727d99ace0bffa1bb'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 15000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911c686fecd86209cc9d6b1'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 44000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911caec3363974d05df38a3'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 44000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911ccd5a9481a9d0570cad7'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 44000,
+    _class: 'com.air_asia.schema.Cart'
+  },
+  {
+    _id: ObjectId('6911cd914fed3974aa69de2c'),
+    userId: 'U1003',
+    items: [
+      {
+        itemId: 'FL1234',
+        type: 'flight-1',
+        description: 'Bangalore to Kuala Lumpur flight ticket',
+        price: 31500
+      },
+      {
+        itemId: 'HT4567',
+        type: 'hotel-1',
+        description: '3-night stay at AirAsia partner hotel',
+        price: 11200
+      },
+      {
+        itemId: 'AD7891',
+        type: 'addon-1',
+        description: 'Extra baggage 15kg',
+        price: 1300
+      }
+    ],
+    totalAmount: 44000,
+    _class: 'com.air_asia.schema.Cart'
+  }
+]
+combined_cart_db>
+
+=============================================================
+Process of Local redis connection and install using ubuntu cmd
+==============================================================
+
+amaopal@ZCBLRLP0258:~$ sudo apt install redis-server -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  redis-server
+0 upgraded, 1 newly installed, 0 to remove and 31 not upgraded.
+Need to get 51.7 kB of archives.
+After this operation, 186 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 redis-server amd64 5:7.0.15-1ubuntu0.24.04.2 [51.7 kB]
+Fetched 51.7 kB in 2s (34.3 kB/s)
+Selecting previously unselected package redis-server.
+(Reading database ... 64743 files and directories currently installed.)
+Preparing to unpack .../redis-server_5%3a7.0.15-1ubuntu0.24.04.2_amd64.deb ...
+Unpacking redis-server (5:7.0.15-1ubuntu0.24.04.2) ...
+Setting up redis-server (5:7.0.15-1ubuntu0.24.04.2) ...
+Created symlink /etc/systemd/system/redis.service → /usr/lib/systemd/system/redis-server.service.
+Created symlink /etc/systemd/system/multi-user.target.wants/redis-server.service → /usr/lib/systemd/system/redis-server.service.
+Processing triggers for man-db (2.12.0-4build2) ...
+amaopal@ZCBLRLP0258:~$ sudo redis-server --daemonize yes
+amaopal@ZCBLRLP0258:~$ redis-cli ping
+PONG
+amaopal@ZCBLRLP0258:~$ redis-cli
+127.0.0.1:6379> keys *
+(empty array)
+127.0.0.1:6379> keys *
+(empty array)
+127.0.0.1:6379>

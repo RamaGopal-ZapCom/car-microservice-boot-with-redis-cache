@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: combined-cart-service
+
+  data:
+    mongodb:
+      #for local only we will use the below url
+      uri: mongodb://localhost:27017/combined_cart_db
+      #here added docker-compose.yml mongodb continer-name is must match with here
+      #uri: mongodb://mongodb:27017/combined_cart_db
+
+    redis:
+      host: localhost
+      #if we are running in the docker-compose use below
+      #host: redis
+      port: 6379
+      timeout: 2000ms
+
+
+  cache:
+    type: redis
+    cache-names: cartCache
+    time-to-live: 600000 # 10 minutes
+
