@@ -1,3 +1,8 @@
+Install the the Redis first
+D:\Air-Asia-POC-7-11-2025\softwares\Redis-x64-3.2.100
+Then run the command locally or dabble click the  redis-server.exe
+
+
 Windows PowerShell
 Copyright (C) Microsoft Corporation. All rights reserved.
 
