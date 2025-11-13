@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface CartService {
     Cart addOrUpdateCart(String userId, Cart cart);
-    Optional<Cart> getCart(String userId);
+    Cart getCart(String userId);
     void clearCart(String userId);
     List<Cart> getAllCarts();
 

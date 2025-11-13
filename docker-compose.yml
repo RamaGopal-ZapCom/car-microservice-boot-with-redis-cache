@@ -24,11 +24,11 @@ services:
       - mongo-data:/data/db
     restart: always
 
-  combined-cart-service:
+  combined-cart-ms-service:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: combined-cart-service
+    container_name: combined-cart-ms-service
     ports:
       - "8081:8081"
     depends_on:

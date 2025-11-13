@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Rama Gopal
@@ -33,7 +32,7 @@ public class CartController {
     }
 
     @GetMapping("/{userId}")
-    public Optional<Cart> getCart(@PathVariable String userId) {
+    public Cart getCart(@PathVariable String userId) {
         return cartService.getCart(userId);
     }
 

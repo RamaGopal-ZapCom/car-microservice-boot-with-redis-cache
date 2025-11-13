@@ -1,6 +1,73 @@
+Local-testing:
+==============
 Install the the Redis first
-D:\Air-Asia-POC-7-11-2025\softwares\Redis-x64-3.2.100
+D:\Air-Asia-POC-7-11-2025\softwares\Redis-8.0.0-Windows-x64-msys2-with-Service\Redis-8.0.0-Windows-x64-msys2-with-Service
 Then run the command locally or dabble click the  redis-server.exe
+
+1630:C 13 Nov 2025 10:31:26.596 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1630:C 13 Nov 2025 10:31:26.598 * Redis version=8.0.0, bits=64, commit=00000000, modified=0, pid=1630, just started
+1630:C 13 Nov 2025 10:31:26.598 # Warning: no config file specified, using the default config. In order to specify a config file use /Redis-8.0.0-Windows-x64-msys2-with-Service/Redis-8.0.0-Windows-x64-msys2-with-Service/redis-server /path/to/redis.conf
+1630:M 13 Nov 2025 10:31:26.600 # You requested maxclients of 10000 requiring at least 10032 max file descriptors.
+1630:M 13 Nov 2025 10:31:26.601 # Server can't set maximum open files to 10032 because of OS error: Operation not permitted.
+1630:M 13 Nov 2025 10:31:26.601 # Current maximum open files is 3200. maxclients has been reduced to 3168 to compensate for low ulimit. If you need higher maxclients increase 'ulimit -n'.
+1630:M 13 Nov 2025 10:31:26.601 * monotonic clock: POSIX clock_gettime
+                _._
+           _.-``__ ''-._
+      _.-``    `.  `_.  ''-._           Redis Open Source
+  .-`` .-```.  ```\/    _.,_ ''-._      8.0.0 (00000000/0) 64 bit
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 1630
+  `-._    `-._  `-./  _.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |           https://redis.io
+  `-._    `-._`-.__.-'_.-'    _.-'
+ |`-._`-._    `-.__.-'    _.-'_.-'|
+ |    `-._`-._        _.-'_.-'    |
+  `-._    `-._`-.__.-'_.-'    _.-'
+      `-._    `-.__.-'    _.-'
+          `-._        _.-'
+              `-.__.-'
+
+ Redis for Windows Project Home
+ https://github.com/redis-windows/redis-windows
+
+1630:M 13 Nov 2025 10:31:26.609 * Server initialized
+1630:M 13 Nov 2025 10:31:26.611 * Loading RDB produced by version 8.0.0
+1630:M 13 Nov 2025 10:31:26.611 * RDB age 65257 seconds
+1630:M 13 Nov 2025 10:31:26.611 * RDB memory usage when created 0.62 Mb
+1630:M 13 Nov 2025 10:31:26.612 * Done loading RDB, keys loaded: 1, keys expired: 1.
+1630:M 13 Nov 2025 10:31:26.612 * DB loaded from disk: 0.003 seconds
+1630:M 13 Nov 2025 10:31:26.612 * Ready to accept connections tcp
+1630:M 13 Nov 2025 11:11:40.156 * DB saved on disk
+1630:M 13 Nov 2025 11:13:48.473 * DB saved on disk
+
+
+and also same location run the
+
+D:\Air-Asia-POC-7-11-2025\softwares\Redis-8.0.0-Windows-x64-msys2-with-Service\Redis-8.0.0-Windows-x64-msys2-with-Service>redis-cli
+127.0.0.1:6379> keys *
+1) "cartCache::U1007"
+127.0.0.1:6379>
+127.0.0.1:6379> keys *
+1) "cartCache::U10010"
+2) "cartCache::U1007"
+127.0.0.1:6379> get cartCache::U10010
+"\xac\xed\x00\x05sr\x00\x18com.air_asia.schema.Cart\xbd\x01?\xdb\x91\xa88D\x02\x00\x04D\x00\x0btotalAmountL\x00\x02idt\x00\x12Ljava/lang/String;L\x00\x05itemst\x00\x10Ljava/util/List;L\x00\x06userIdq\x00~\x00\x01xp@\xe5|\x00\x00\x00\x00\x00t\x00\x1869156d570209dd31e6fb9d49sr\x00\x13java.util.ArrayListx\x81\xd2\x1d\x99\xc7a\x9d\x03\x00\x01I\x00\x04sizexp\x00\x00\x00\x03w\x04\x00\x00\x00\x03sr\x00\x1ccom.air_asia.schema.CartItem\x9de\xd1\x96\x1a\x84i\xa5\x02\x00\x04D\x00\x05priceL\x00\x0bdescriptionq\x00~\x00\x01L\x00\x06itemIdq\x00~\x00\x01L\x00\x04typeq\x00~\x00\x01xp@\xde\xc3\x00\x00\x00\x00\x00t\x00'Bangalore to Kuala Lumpur flight tickett\x00\x06FL1234t\x00\tflight-10sq\x00~\x00\a@\xc5\xe0\x00\x00\x00\x00\x00t\x00%3-night stay at AirAsia partner hotelt\x00\x06HT4567t\x00\bhotel-10sq\x00~\x00\a@\x94P\x00\x00\x00\x00\x00t\x00\x12Extra baggage 15kgt\x00\x06AD7891t\x00\baddon-10xt\x00\x06U10010"
+127.0.0.1:6379> get "cartCache::U10010"
+"\xac\xed\x00\x05sr\x00\x18com.air_asia.schema.Cart\xbd\x01?\xdb\x91\xa88D\x02\x00\x04D\x00\x0btotalAmountL\x00\x02idt\x00\x12Ljava/lang/String;L\x00\x05itemst\x00\x10Ljava/util/List;L\x00\x06userIdq\x00~\x00\x01xp@\xe5|\x00\x00\x00\x00\x00t\x00\x1869156d570209dd31e6fb9d49sr\x00\x13java.util.ArrayListx\x81\xd2\x1d\x99\xc7a\x9d\x03\x00\x01I\x00\x04sizexp\x00\x00\x00\x03w\x04\x00\x00\x00\x03sr\x00\x1ccom.air_asia.schema.CartItem\x9de\xd1\x96\x1a\x84i\xa5\x02\x00\x04D\x00\x05priceL\x00\x0bdescriptionq\x00~\x00\x01L\x00\x06itemIdq\x00~\x00\x01L\x00\x04typeq\x00~\x00\x01xp@\xde\xc3\x00\x00\x00\x00\x00t\x00'Bangalore to Kuala Lumpur flight tickett\x00\x06FL1234t\x00\tflight-10sq\x00~\x00\a@\xc5\xe0\x00\x00\x00\x00\x00t\x00%3-night stay at AirAsia partner hotelt\x00\x06HT4567t\x00\bhotel-10sq\x00~\x00\a@\x94P\x00\x00\x00\x00\x00t\x00\x12Extra baggage 15kgt\x00\x06AD7891t\x00\baddon-10xt\x00\x06U10010"
+127.0.0.1:6379> FLUSHALL
+OK
+127.0.0.1:6379> keys *
+(empty array)
+127.0.0.1:6379> keys *
+1) "cartCache::U10010"
+127.0.0.1:6379> keys *
+1) "cartCache::U10010"
+127.0.0.1:6379> FLUSHALL  // this is for the clear the data or cache data
+OK
+127.0.0.1:6379>
+
 
 
 Windows PowerShell
@@ -674,3 +741,4 @@ amaopal@ZCBLRLP0258:~$ redis-cli
 127.0.0.1:6379> keys *
 (empty array)
 127.0.0.1:6379>
+----------------------------------------------------------------------------------------
