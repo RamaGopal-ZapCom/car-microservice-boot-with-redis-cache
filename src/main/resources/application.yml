@@ -25,6 +25,8 @@ spring:
     cache-names: cartCache
     redis:
       time-to-live: 600000ms  # 10 minutes (fixed key placement)
+
+
 # for print the console quires
 logging:
   level:
