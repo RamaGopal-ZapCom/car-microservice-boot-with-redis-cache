@@ -742,3 +742,18 @@ amaopal@ZCBLRLP0258:~$ redis-cli
 (empty array)
 127.0.0.1:6379>
 ----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+C:\Users\RamaGopal>docker exec -it cart-microservice-boot-with-redis-cache-redis-1  redis-cli
+127.0.0.1:6379> keys*
+(error) ERR unknown command 'keys*', with args beginning with:
+127.0.0.1:6379> keys *
+1) "cartCache::U10018"
+127.0.0.1:6379> keys *
+1) "cartCache::U10019"
+2) "cartCache::U10018"
+127.0.0.1:6379> keys *
+1) "cartCache::U10017"
+2) "cartCache::U10010"
+3) "cartCache::U10019"
+4) "cartCache::U10018"
+127.0.0.1:6379>
