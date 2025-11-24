@@ -1,0 +1,143 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\RamaGopal> docker run --rm `
+>>   --network=cart-microservice-boot-with-redis-cache_default `
+>>   -e "KONG_DATABASE=postgres" `
+>>   -e "KONG_PG_HOST=kong-postgres" `
+>>   -e "KONG_PG_USER=kong" `
+>>   -e "KONG_PG_PASSWORD=kong" `
+>>   -e "KONG_PG_DATABASE=kong" `
+>>   kong/kong:3.6 kong migrations bootstrap
+Bootstrapping database...
+migrating core on database 'kong'...
+core migrated up to: 000_base (executed)
+core migrated up to: 003_100_to_110 (executed)
+core migrated up to: 004_110_to_120 (executed)
+core migrated up to: 005_120_to_130 (executed)
+core migrated up to: 006_130_to_140 (executed)
+core migrated up to: 007_140_to_150 (executed)
+core migrated up to: 008_150_to_200 (executed)
+core migrated up to: 009_200_to_210 (executed)
+core migrated up to: 010_210_to_211 (executed)
+core migrated up to: 011_212_to_213 (executed)
+core migrated up to: 012_213_to_220 (executed)
+core migrated up to: 013_220_to_230 (executed)
+core migrated up to: 014_230_to_270 (executed)
+core migrated up to: 015_270_to_280 (executed)
+core migrated up to: 016_280_to_300 (executed)
+core migrated up to: 017_300_to_310 (executed)
+core migrated up to: 018_310_to_320 (executed)
+core migrated up to: 019_320_to_330 (executed)
+core migrated up to: 020_330_to_340 (executed)
+core migrated up to: 021_340_to_350 (executed)
+core migrated up to: 022_350_to_360 (executed)
+migrating acl on database 'kong'...
+acl migrated up to: 000_base_acl (executed)
+acl migrated up to: 002_130_to_140 (executed)
+acl migrated up to: 003_200_to_210 (executed)
+acl migrated up to: 004_212_to_213 (executed)
+migrating acme on database 'kong'...
+acme migrated up to: 000_base_acme (executed)
+acme migrated up to: 001_280_to_300 (executed)
+acme migrated up to: 002_320_to_330 (executed)
+acme migrated up to: 003_350_to_360 (executed)
+migrating basic-auth on database 'kong'...
+basic-auth migrated up to: 000_base_basic_auth (executed)
+basic-auth migrated up to: 002_130_to_140 (executed)
+basic-auth migrated up to: 003_200_to_210 (executed)
+migrating bot-detection on database 'kong'...
+bot-detection migrated up to: 001_200_to_210 (executed)
+migrating hmac-auth on database 'kong'...
+hmac-auth migrated up to: 000_base_hmac_auth (executed)
+hmac-auth migrated up to: 002_130_to_140 (executed)
+hmac-auth migrated up to: 003_200_to_210 (executed)
+migrating http-log on database 'kong'...
+http-log migrated up to: 001_280_to_300 (executed)
+migrating ip-restriction on database 'kong'...
+ip-restriction migrated up to: 001_200_to_210 (executed)
+migrating jwt on database 'kong'...
+jwt migrated up to: 000_base_jwt (executed)
+jwt migrated up to: 002_130_to_140 (executed)
+jwt migrated up to: 003_200_to_210 (executed)
+migrating key-auth on database 'kong'...
+key-auth migrated up to: 000_base_key_auth (executed)
+key-auth migrated up to: 002_130_to_140 (executed)
+key-auth migrated up to: 003_200_to_210 (executed)
+key-auth migrated up to: 004_320_to_330 (executed)
+migrating oauth2 on database 'kong'...
+oauth2 migrated up to: 000_base_oauth2 (executed)
+oauth2 migrated up to: 003_130_to_140 (executed)
+oauth2 migrated up to: 004_200_to_210 (executed)
+oauth2 migrated up to: 005_210_to_211 (executed)
+oauth2 migrated up to: 006_320_to_330 (executed)
+oauth2 migrated up to: 007_320_to_330 (executed)
+migrating opentelemetry on database 'kong'...
+opentelemetry migrated up to: 001_331_to_332 (executed)
+migrating post-function on database 'kong'...
+post-function migrated up to: 001_280_to_300 (executed)
+migrating pre-function on database 'kong'...
+pre-function migrated up to: 001_280_to_300 (executed)
+migrating rate-limiting on database 'kong'...
+rate-limiting migrated up to: 000_base_rate_limiting (executed)
+rate-limiting migrated up to: 003_10_to_112 (executed)
+rate-limiting migrated up to: 004_200_to_210 (executed)
+rate-limiting migrated up to: 005_320_to_330 (executed)
+rate-limiting migrated up to: 006_350_to_360 (executed)
+migrating response-ratelimiting on database 'kong'...
+response-ratelimiting migrated up to: 000_base_response_rate_limiting (executed)
+response-ratelimiting migrated up to: 001_350_to_360 (executed)
+migrating session on database 'kong'...
+session migrated up to: 000_base_session (executed)
+session migrated up to: 001_add_ttl_index (executed)
+session migrated up to: 002_320_to_330 (executed)
+64 migrations processed
+64 executed
+Database is up-to-date
+PS C:\Users\RamaGopal> docker network ls
+NETWORK ID     NAME                                                DRIVER    SCOPE
+f625c6f62a3b   bridge                                              bridge    local
+c8250d471fc0   car-microservice-boot-with-redis-cache_default      bridge    local
+ecdccdc29d0a   cart-microservice-boot-with-redis-cache_default     bridge    local
+cdd2cd9ce4ae   cart-microservice_default                           bridge    local
+dfd7b24d3a75   cart-service_default                                bridge    local
+19ba5ba3e6b3   host                                                host      local
+587eb2656699   none                                                null      local
+67e4caae81cd   product-curd-backend-app_springboot-mysql-network   bridge    local
+PS C:\Users\RamaGopal> docker compose up -d
+no configuration file provided: not found
+PS C:\Users\RamaGopal>
+
+--------------------------------------------------------------------
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache> docker compose down
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache> docker compose up -d kong-postgres
+no such service: kong-postgres
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache> docker compose up -d postgres
+[+] Running 2/2
+ ✔ Network cart-microservice-boot-with-redis-cache_default  Created                                                               0.0s
+ ✔ Container kong-postgres                                  Started                                                               0.3s
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache> docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+152528548ebd   postgres:15   "docker-entrypoint.s…"   9 seconds ago   Up 9 seconds   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   kong-postgres
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache> docker compose up -d
+[+] Running 6/6
+ ✔ Container redis                     Started                                                                                    0.7s
+ ✔ Container mongodb                   Started                                                                                    0.6s
+ ✔ Container kong-postgres             Running                                                                                    0.0s
+ ✔ Container combined-cart-ms-service  Started                                                                                    0.8s
+ ✔ Container kong                      Started                                                                                    1.2s
+ ✔ Container konga                     Started                                                                                    1.6s
+PS D:\Air-Asia-POC-7-11-2025\git\cart-microservice-boot-with-redis-cache>
+
+
+
+
+
