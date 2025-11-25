@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: combined-cart-service
+    name: cart-microservice-boot-with-redis-cache
   banner:
     location: classpath:static/banner.txt
 

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.air-asia</groupId>
-	<artifactId>cart-microservice</artifactId>
+	<artifactId>cart-microservice-boot-with-redis-cache</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cart-microservice</name>
 	<description>Demo cart-microservice for Spring Boot</description>
@@ -88,7 +88,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>cart-microservice</finalName>
+		<finalName>cart-microservice-boot-with-redis-cache</finalName>
 		<plugins>
 
 			<!-- Spring Boot Maven Plugin -->

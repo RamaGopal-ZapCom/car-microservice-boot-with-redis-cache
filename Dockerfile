@@ -9,10 +9,10 @@ FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
 # 3. Copy the JAR file built by Maven into the container
-COPY target/cart-microservice.jar /app/cart-microservice.jar
+COPY target/cart-microservice-boot-with-redis-cache.jar /app/cart-microservice-boot-with-redis-cache.jar
 
 # 4. Expose the port your Spring Boot app runs on
 EXPOSE 8081
 
 # 5. Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "cart-microservice.jar"]
+ENTRYPOINT ["java", "-jar", "cart-microservice-boot-with-redis-cache.jar"]
